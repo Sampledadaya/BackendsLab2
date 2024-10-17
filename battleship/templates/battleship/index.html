@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Морской бой{% endblock %}
+
+{% block content %}
+     {% load static %}
+<!-- Подключаем файл стилей -->
+<link rel="stylesheet" href="{% static 'blog/styles.css' %}">
+<h1>Морской бой</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Начать новую игру</button>
+</form>
+{% endblock %}

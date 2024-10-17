@@ -1,4 +1,4 @@
-<!-- templates/blog/sidebar.html -->
+<!-- blog/templates/blog/sidebar.html -->
 <div class="sidebar">
     <h2>Навигация</h2>
     <ul>
@@ -8,6 +8,7 @@
         <li><a href="{% url 'password_reset' %}">Сброс пароля</a></li>
         <li><a href="{% url 'article_create' %}">Создать статью</a></li>
         <li><a href="{% url 'article_list' %}">Список статей</a></li>
+        <li><a href="{% url 'battleship_index' %}">Игры</a></li> <!-- Добавляем ссылку на игры -->
     </ul>
     {% if user.is_authenticated %}
         <h3>Привет, {{ user.username }}!</h3>

@@ -1,0 +1,36 @@
+/* static/css/battleship.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+h1, h2 {
+    color: #007BFF; /* Синий цвет для заголовков */
+}
+table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid black;
+}
+button {
+    background-color: #007BFF; /* Синий фон для кнопки */
+    color: white; /* Белый текст */
+    border: none;
+    border-radius: 5px; /* Скругленные углы */
+    padding: 5px 10px;
+    cursor: pointer; /* Указатель на кнопку */
+}
+button:hover {
+    background-color: #0056b3; /* Темнее синий при наведении */
+}
+.hit {
+    background-color: #ffcccc; /* Цвет для попадания */
+}
+.miss {
+    background-color: #ccffcc; /* Цвет для промаха */
+}

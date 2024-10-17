@@ -1,0 +1,112 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Морской бой - Игра{% endblock %}
+
+{% block content %}
+<h1>Морской бой</h1>
+
+<div class="game-container">
+    <div class="player-field">
+        <h2>Игровое поле игрока</h2>
+        <table>
+            {% for row in game.player_field %}
+            <tr>
+                {% for cell in row %}
+                <td>
+                    {% if cell == 2 %}
+                        X
+                    {% elif cell == 1 %}
+                        O
+                    {% else %}
+                        .
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="computer-field">
+        <h2>Поле компьютера</h2>
+        <table>
+            {% for row in game.player_shots %}
+            <tr>
+                {% for cell in row %}
+                <td>
+                    {% if cell == 2 %}
+                        <span class="hit">X</span>  <!-- Попадание -->
+                    {% elif cell == 3 %}
+                        <span class="miss">O</span>  <!-- Промах -->
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="row" value="{{ forloop.parentloop.counter0 }}">
+                            <input type="hidden" name="col" value="{{ forloop.counter0 }}">
+                            <button type="submit">Shoot</button>
+                        </form>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% if game.game_over %}
+    <h2>Игра окончена. Победитель: {{ game.winner }}</h2>
+    <a href="{% url 'battleship_index' %}">Начать новую игру</a>
+{% endif %}
+
+<style>
+    /* Стили для контейнера игры */
+    .game-container {
+        display: flex;  /* Используем Flexbox для размещения полей рядом */
+        justify-content: space-between;  /* Разделяем пространство между полями */
+        margin: 20px 0;  /* Добавляем отступ сверху и снизу */
+    }
+
+    /* Стили для полей */
+    .player-field, .computer-field {
+        border: 1px solid #000;  /* Добавляем рамку */
+        background-color: #fff;  /* Белый фон */
+        margin-right: 20px;  /* Отступ справа для игрока */
+        flex: 1;  /* Поля будут занимать равное пространство */
+    }
+
+    /* Стили для таблицы */
+    table {
+        border-collapse: collapse;  /* Убираем двойные границы */
+        width: 100%;  /* Задаем ширину 100% */
+    }
+
+    td {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid black;
+    }
+
+    .hit {
+        background-color: #ffcccc; /* Цвет для попадания */
+    }
+
+    .miss {
+        background-color: #ccffcc; /* Цвет для промаха */
+    }
+
+    button {
+        background-color: #007BFF; /* Синий фон для кнопки */
+        color: white; /* Белый текст */
+        border: none;
+        border-radius: 5px; /* Скругленные углы */
+        padding: 5px 10px;
+        cursor: pointer; /* Указатель на кнопку */
+    }
+
+    button:hover {
+        background-color: #0056b3; /* Темнее синий при наведении */
+    }
+</style>
+{% endblock %}
