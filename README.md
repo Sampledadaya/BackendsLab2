@@ -1,5 +1,1 @@
-# BackendsLab2
-# BackendsLab2
-# BackendsLab2
-# BackendsLab2
-# BackendsLab2
+# BackEnd Django Cite-blog with SeaBattleShip
